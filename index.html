@@ -120,7 +120,7 @@ fleetRoot.innerHTML = fleet.map(group => `
       ${group.vehicles.map(car => `
         <article class="car-card">
           <img
-            src="https://placehold.co/600x350/171717/D4AF37?text=${encodeURIComponent(car[0])}"
+            src="${car[0].toLowerCase().includes('mazda demio') ? './images/1529e0db-7730-42f2-8062-9e4dfa7c6ea8.jpeg' : car[0].toLowerCase().includes('honda fit') ? './images/IMG_1741.jpeg' : car[0].toLowerCase().includes('nissan note') ? './images/c2338172-2165-413c-8e7b-0a93d5fdf360.jpeg' : 'https://placehold.co/600x350/171717/D4AF37?text=' + encodeURIComponent(car[0])}"
             alt="${car[0]}"
             loading="lazy"
           >

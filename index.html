@@ -137,13 +137,14 @@ if (fleetRoot) {
 
           return `
             <article class="car-card">
-              <img
-                class="car-image"
-                src="./images/${car[2]}"
-                alt="${car[0]} for hire - Smart Drive Car Hire"
-                loading="lazy"
-                onerror="this.style.display='none'"
-              >
+            
+<img
+  class="car-image"
+  src="./images/${car[2]}.jpg"
+  alt="${car[0]} for hire - Smart Drive Car Hire"
+  loading="lazy"
+  onerror="if (!this.dataset.fallback) { this.dataset.fallback = '1'; this.src = './images/${car[2]}.JPG'; } else { this.style.display = 'none'; }"
+>
 
               <div class="car-info">
                 <h3>${car[0]}</h3>

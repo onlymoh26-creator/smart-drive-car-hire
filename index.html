@@ -64,79 +64,120 @@ const fleet = [
   {
     category: "ECONOMY CARS",
     vehicles: [
-      ["Toyota Vitz", 2500],
-      ["Mazda Demio", 2500],
-      ["Honda Fit", 2500],
-      ["Nissan Note", 2500],
-      ["Toyota Passo", 2000],
-      ["Toyota Ractis", 2000]
-    ]  
-  },
-  {
-    category: "SEDANS",
-    vehicles: [
-      ["Toyota Axio", 3000],
-      ["Toyota Premio", 3000],
-      ["Mazda Axela", 3000],
-      ["Mazda Atenza", 3000],
-      ["Toyota Allion", 3500],
-      ["Toyota Fielder", 3500],
-      ["Toyota Mark X", 3000]
-    ]
-  },
-  {
-    category: "SUVS & 4×4",
-    vehicles: [
-      ["Nissan X-Trail", 7000],
-      ["Subaru Forester", 6500],
-      ["Toyota Harrier", 4500],
-      ["Mazda CX-3", 3000],
-      ["Mazda CX-5", 3500],
-      ["Toyota Prado", 6000],
-      ["Land Cruiser V8", 14000],
-      ["Lexus RX/NX", 9000]
+      ["Mazda Demio", 2500, "mazda-demio.jpeg"],
+      ["Honda Fit", 2500, "honda-fit.jpeg"],
+      ["Nissan Note", 2500, "nissan-note.jpeg"],
+      ["Toyota Passo", 2000, "toyota-passo.jpeg"],
+      ["Toyota Vitz", 2500, "toyota-vitz.jpeg"]
     ]
   },
   {
     category: "VANS & FAMILY CARS",
     vehicles: [
-      ["Toyota Noah", 5000],
-      ["Toyota Wish", 5000],
-      ["Toyota Alphard", 9000],
-      ["Toyota Hiace", 9000],
-      ["Toyota Voxy", 4500],
-      ["Toyota Sienta", 3500]
+      ["Toyota Noah", 5000, "toyota-noah.jpeg"],
+      ["Toyota Voxy", 4500, "toyota-voxy.jpeg"],
+      ["Toyota Esquire", 5000, "toyota-esquire.jpeg"],
+      ["Nissan Serena", 5000, "nissan-serena.jpeg"],
+      ["Honda Stepwgn", 5000, "honda-stepwgn.jpeg"],
+      ["Mazda Biante", 5000, "mazda-biante.jpeg"],
+      ["Mitsubishi Delica", 5000, "mitsubishi-delica.jpeg"],
+      ["Nissan Elgrand", 5000, "nissan-elgrand.jpeg"]
+    ]
+  },
+  {
+    category: "SUVS & 4×4",
+    vehicles: [
+      ["Toyota Harrier", 4500, "toyota-harrier.jpeg"],
+      ["Toyota Prado", 6000, "toyota-prado.jpeg"],
+      ["Land Cruiser V8", 14000, "land-cruiser-v8.jpeg"],
+      ["Nissan X-Trail", 7000, "nissan-x-trail.jpeg"],
+      ["Subaru Forester", 6500, "subaru-forester.jpeg"],
+      ["Mazda CX-3", 3000, "mazda-cx-3.jpeg"],
+      ["Mazda CX-5", 3500, "mazda-cx-5.jpeg"],
+      ["Mazda CX-8", 6500, "mazda-cx-8.jpeg"],
+      ["Honda CR-V", 4500, "honda-cr-v.jpeg"],
+      ["Toyota Fortuner", 4500, "toyota-fortuner.jpeg"],
+      ["Mitsubishi Outlander", 4500, "mitsubishi-outlander.jpeg"]
+    ]
+  },
+  {
+    category: "SEDANS",
+    vehicles: [
+      ["Toyota Axio", 3000, "toyota-axio.jpeg"],
+      ["Toyota Allion", 3500, "toyota-allion.jpeg"],
+      ["Toyota Fielder", 3500, "toyota-fielder.jpeg"],
+      ["Toyota Mark X", 3000, "toyota-mark-x.jpeg"],
+      ["Toyota Crown", 3500, "toyota-crown.jpeg"],
+      ["Honda Civic", 3500, "honda-civic.jpeg"],
+      ["Volkswagen Passat", 3500, "volkswagen-passat.jpeg"]
     ]
   }
 ];
 
 const fleetRoot = document.getElementById("fleetGrid");
-const whatsapp = "https://wa.me/254733920806";
+const whatsappNumber = "254733920806";
 
-fleetRoot.innerHTML = fleet.map(group => `
-  <section class="fleet-category-section">
-    <h2 class="fleet-category">${group.category}</h2>
-    <div class="fleet-grid">
-      ${group.vehicles.map(car => `
-        <article class="car-card">
-          <img
-            src="${car[0].toLowerCase().includes('mazda demio') ? './1529e0db-7730-42f2-8062-9e4dfa7c6ea8.jpeg' : car[0].toLowerCase().includes('honda fit') ? './IMG_1741.jpeg' : car[0].toLowerCase().includes('nissan note') ? './c2338172-2165-413c-8e7b-0a93d5fdf360.jpeg' : 'https://placehold.co/600x350/171717/D4AF37?text=' + encodeURIComponent(car[0])}"
-            alt="${car[0]}"
-            loading="lazy"
-          >
-          <div class="car-info">
-            <h3>${car[0]}</h3>
-            <p>Comfortable, reliable vehicle for your journey.</p>
-            <p><strong>From KSh ${car[1].toLocaleString("en-KE")} per day</strong></p>
-            <a href="${whatsapp}?text=${encodeURIComponent("Hello Smart Drive Car Hire, I would like to enquire about hiring the " + car[0] + ". Please confirm availability and the total price.")}" target="_blank" rel="noopener">
-              Enquire on WhatsApp
-            </a>
-          </div>
-        </article>
-      `).join("")}
-    </div>
-  </section>
-`).join("");
+if (fleetRoot) {
+  fleetRoot.innerHTML = fleet.map(group => `
+    <section class="fleet-category-section">
+      <h2 class="fleet-category">${group.category}</h2>
+
+      <div class="fleet-grid">
+        ${group.vehicles.map(car => {
+          const message =
+            "Hello Smart Drive Car Hire, I would like to enquire about hiring the " +
+            car[0] +
+            " listed at KSh " +
+            car[1].toLocaleString("en-KE") +
+            " per day. Please confirm availability and the total cost.";
+
+          const whatsappLink =
+            "https://wa.me/" + whatsappNumber +
+            "?text=" + encodeURIComponent(message);
+
+          return `
+            <article class="car-card">
+              <img
+                class="car-image"
+                src="./${car[2]}"
+                alt="${car[0]} for hire - Smart Drive Car Hire"
+                loading="lazy"
+                onerror="this.style.display='none'"
+              >
+
+              <div class="car-info">
+                <h3>${car[0]}</h3>
+
+                <p class="car-description">
+                  Comfortable and reliable vehicle for your journey.
+                </p>
+
+                <p class="car-price">
+                  <strong>
+                    KSh ${car[1].toLocaleString("en-KE")} per day
+                  </strong>
+                </p>
+
+                <a
+                  class="car-book-button"
+                  href="${whatsappLink}"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Enquire on WhatsApp
+                </a>
+              </div>
+            </article>
+          `;
+        }).join("")}
+      </div>
+    </section>
+  `).join("");
+} else {
+  console.error(
+    'Smart Drive fleet container not found. Check for id="fleetGrid" in index.html.'
+  );
+}
 </script>
       
 
